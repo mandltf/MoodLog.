@@ -2,7 +2,6 @@ package controllers;
 
 import helpers.DBHelper;
 import javax.swing.JOptionPane;
-import models.Models_User;
 import views.SignUp;
 import java.sql.*;
 import views.Login;

@@ -6,8 +6,11 @@ package controllers;
 
 import helpers.DBHelper;
 import javax.swing.JOptionPane;
+import models.Models_Form;
 import views.Form;
 import views.Login;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -28,16 +31,25 @@ public class Controller_Form {
         help = new DBHelper();
     }
     
-    //ambil mood dr homepage
-    public void inputEmot(){
-        String mood = form.getMood();
-        String catatan = form.getCatatan();
-        int level = form.getLevelMood();
-
-        help.insertMood(mood, catatan, level); 
-        JOptionPane.showMessageDialog(form, "Mood berhasil disimpan!");
-        
+    //fungsi ambil date
+    public String getCurrentTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
     }
+    
+    //ambil mood dr homepage
+    public void inputEmot(int userid){
+        Models_Form entry = new Models_Form();
+        entry.setMood(form.getMood());
+        entry.setCatatan(form.getCatatan());
+        entry.setLevelMood(form.getLevelMood());
+        entry.setTimestamp(getCurrentTimestamp());
+        entry.setUsername(form.getUsername());
+
+        help.insertMood(userid, entry); // Ubah DBHelper agar bisa menerima Models_Form
+        JOptionPane.showMessageDialog(form, "Mood berhasil disimpan!");
+    }
+
     
     
 }

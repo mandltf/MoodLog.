@@ -5,6 +5,8 @@ import views.History;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.*;
+import models.Models_Form;
 
 public class Controller_History {
     private DBHelper db;
@@ -16,22 +18,25 @@ public class Controller_History {
     }
 
     public void tampilData() {
-        String username = view.getUsername();
-        ResultSet rs = db.getMoodsByUsername(username);
-
-        DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
-        model.setRowCount(0); // clear
-
         try {
-            while (rs != null && rs.next()) {
-                String date = rs.getString("timestamp");
-                String mood = rs.getString("mood");
-                String desc = rs.getString("catatan");
-                int level = rs.getInt("level_mood");
-                model.addRow(new Object[]{date, mood, desc, level});
+            List<Models_Form> entries = db.getMoodsById(view.getUserid()); // DBHelper kembalikan list Models_Form
+            DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
+            model.setRowCount(0);
+            for (Models_Form entry : entries) {
+                model.addRow(new Object[]{
+                    entry.getTimestamp(),
+                    entry.getMood(),
+                    entry.getCatatan(),
+                    entry.getLevelMood()
+                });
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            System.out.println("Error displaying data: " + e.getMessage());
             e.printStackTrace();
+            JOptionPane.showMessageDialog(view, 
+                "Error loading mood history: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -42,14 +47,19 @@ public class Controller_History {
             return;
         }
 
-        String timestamp = view.getTable().getValueAt(selectedRow, 0).toString();
-        String username = view.getUsername();
-
-        if (db.deleteMood(timestamp, username)) {
-            JOptionPane.showMessageDialog(view, "Data berhasil dihapus.");
-            tampilData();
-        } else {
-            JOptionPane.showMessageDialog(view, "Gagal menghapus data.");
+        int confirm = JOptionPane.showConfirmDialog(view,
+            "Apakah Anda yakin ingin menghapus data ini?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION);
+            
+        if (confirm == JOptionPane.YES_OPTION) {
+            String timestamp = view.getTable().getValueAt(selectedRow, 0).toString();
+            if (db.deleteMood(timestamp, view.getUsername())) {
+                JOptionPane.showMessageDialog(view, "Data berhasil dihapus.");
+                tampilData(); // Refresh the table
+            } else {
+                JOptionPane.showMessageDialog(view, "Gagal menghapus data.");
+            }
         }
     }
 }

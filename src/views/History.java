@@ -4,6 +4,8 @@
  */
 package views;
 
+import controllers.Controller_History;
+import controllers.Controller_Login;
 import javax.swing.JFrame;
 
 /**
@@ -12,15 +14,19 @@ import javax.swing.JFrame;
  */
 public class History extends javax.swing.JFrame {
     private String username;
+    private int Userid = Controller_Login.id_user;
+    private Controller_History controller;
+    
     public History(Homepage home) {
         initComponents();
         this.username = home.getUsername();
+        controller = new Controller_History(this);
+        controller.tampilData();
         setVisible(true);
         setTitle("History");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        Form form = new Form(home);
-//        this.username = form.getUsername();
+
     }
 
     /**
@@ -165,7 +171,7 @@ public class History extends javax.swing.JFrame {
     }//GEN-LAST:event_editActionPerformed
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tabelMouseClicked
 
     /**
@@ -205,6 +211,10 @@ public class History extends javax.swing.JFrame {
     public String getUsername(){
         return username;
     
+    }
+
+    public int getUserid() {
+        return Userid;
     }
     
     public javax.swing.JTable getTable() {

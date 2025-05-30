@@ -10,6 +10,7 @@ import views.Login;
 public class Controller_Login {
     Login loginView;
     DBHelper db;
+    public static int id_user;
     
     // Constructor untuk Login
     public Controller_Login(Login view) {
@@ -30,6 +31,7 @@ public class Controller_Login {
         try {
             if (rs != null && rs.next()) {
                 String correctPassword = rs.getString("password");
+                id_user = rs.getInt("id_user");
                 if (password.equals(correctPassword)) {
 //                    JOptionPane.showMessageDialog(loginView, "Login berhasil!");
                     

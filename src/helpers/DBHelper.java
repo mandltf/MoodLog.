@@ -1,7 +1,9 @@
 package helpers;
 
+import controllers.Controller_Login;
 import java.sql.*;
 import java.util.*;
+import models.Models_Form;
 
 public class DBHelper {
     private final String dbUrl = "jdbc:mysql://localhost/moodlog";
@@ -61,13 +63,15 @@ public class DBHelper {
     }
     
     //input mood
-public void insertMood(String mood, String catatan, int level) {
+public void insertMood(int userid, Models_Form entry) {
     try {
-        query = "INSERT INTO moods (timestamp, mood, catatan, level_mood) VALUES (CURRENT_TIMESTAMP, ?, ?, ?)";
+        query = "INSERT INTO moods (id_user, timestamp, mood, catatan, level_mood) VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, mood);
-        stmt.setString(2, catatan);
-        stmt.setInt(3, level);
+//        int id_user = Controller_Login.id_user;
+        stmt.setInt(1, userid);
+        stmt.setString(2, entry.getMood());
+        stmt.setString(3, entry.getCatatan());
+        stmt.setInt(4, entry.getLevelMood());
         stmt.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();
@@ -80,17 +84,26 @@ public void insertMood(String mood, String catatan, int level) {
     }
 }
 
-public ResultSet getMoodsByUsername(String username) {
+public List<Models_Form> getMoodsById(int userid) {
+    List<Models_Form> list = new ArrayList<>();
+    query = "SELECT timestamp, mood, catatan, level_mood FROM moods WHERE id_user = ? ORDER BY timestamp DESC";
     try {
-        query = "SELECT timestamp, mood, catatan, level_mood FROM moods WHERE username = ? ORDER BY timestamp DESC";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, username);
+        stmt.setInt(1, userid);
         rs = stmt.executeQuery();
-        return rs;
+        while (rs.next()) {
+            Models_Form entry = new Models_Form();
+            entry.setTimestamp(rs.getString("timestamp"));
+            entry.setMood(rs.getString("mood"));
+            entry.setCatatan(rs.getString("catatan"));
+            entry.setLevelMood(rs.getInt("level_mood"));
+            list.add(entry);
+        }
     } catch (SQLException e) {
         e.printStackTrace();
         return null;
     }
+    return list;
 }
 
 public boolean deleteMood(String timestamp, String username) {
