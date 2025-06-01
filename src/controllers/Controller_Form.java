@@ -11,6 +11,7 @@ import views.Form;
 import views.Login;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.sql.SQLException;
 
 /**
  *
@@ -38,16 +39,24 @@ public class Controller_Form {
     }
     
     //ambil mood dr homepage
-    public void inputEmot(int userid){
-        Models_Form entry = new Models_Form();
-        entry.setMood(form.getMood());
-        entry.setCatatan(form.getCatatan());
-        entry.setLevelMood(form.getLevelMood());
-        entry.setTimestamp(getCurrentTimestamp());
-        entry.setUsername(form.getUsername());
+    public void inputEmot(int userid) {
+        try {
+            Models_Form entry = new Models_Form();
+            entry.setMood(form.getMood());
+            entry.setCatatan(form.getCatatan());
+            entry.setLevelMood(form.getLevelMood());
+            entry.setTimestamp(getCurrentTimestamp());
+            entry.setUsername(form.getUsername());
 
-        help.insertMood(userid, entry); // Ubah DBHelper agar bisa menerima Models_Form
-        JOptionPane.showMessageDialog(form, "Mood berhasil disimpan!");
+            help.insertMood(userid, entry);
+            JOptionPane.showMessageDialog(form, "Mood berhasil disimpan!");
+        }catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(form, 
+                "Error menyimpan mood: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     

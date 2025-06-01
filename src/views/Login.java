@@ -68,7 +68,7 @@ public class Login extends javax.swing.JFrame {
         fpass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 102, 255), 1, true));
 
         login.setBackground(new java.awt.Color(51, 102, 255));
-        login.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        login.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Log In");
         login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));

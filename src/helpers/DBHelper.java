@@ -63,7 +63,7 @@ public class DBHelper {
     }
     
     //input mood
-public void insertMood(int userid, Models_Form entry) {
+public void insertMood(int userid, Models_Form entry) throws SQLException{
     try {
         query = "INSERT INTO moods (id_user, timestamp, mood, catatan, level_mood) VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)";
         stmt = conn.prepareStatement(query);
@@ -86,13 +86,14 @@ public void insertMood(int userid, Models_Form entry) {
 
 public List<Models_Form> getMoodsById(int userid) {
     List<Models_Form> list = new ArrayList<>();
-    query = "SELECT timestamp, mood, catatan, level_mood FROM moods WHERE id_user = ? ORDER BY timestamp DESC";
+    query = "SELECT id_mood, timestamp, mood, catatan, level_mood FROM moods WHERE id_user = ? ORDER BY timestamp DESC";
     try {
         stmt = conn.prepareStatement(query);
         stmt.setInt(1, userid);
         rs = stmt.executeQuery();
         while (rs.next()) {
             Models_Form entry = new Models_Form();
+            entry.setMoodid(rs.getInt("id_mood"));
             entry.setTimestamp(rs.getString("timestamp"));
             entry.setMood(rs.getString("mood"));
             entry.setCatatan(rs.getString("catatan"));
@@ -106,12 +107,11 @@ public List<Models_Form> getMoodsById(int userid) {
     return list;
 }
 
-public boolean deleteMood(String timestamp, String username) {
+public boolean deleteMood(int moodid) {
     try {
-        query = "DELETE FROM moods WHERE timestamp = ? AND username = ?";
+        query = "DELETE FROM moods WHERE id_mood = ?";
         stmt = conn.prepareStatement(query);
-        stmt.setString(1, timestamp);
-        stmt.setString(2, username);
+        stmt.setInt(1, moodid);
         return stmt.executeUpdate() > 0;
     } catch (SQLException e) {
         e.printStackTrace();
@@ -125,7 +125,26 @@ public boolean deleteMood(String timestamp, String username) {
     }
 }
 
-
+public boolean updateMood(int moodid, Models_Form entry) {
+    try {
+        query = "UPDATE moods SET mood = ?, catatan = ?, level_mood = ? WHERE id_mood =  ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, entry.getMood());
+        stmt.setString(2, entry.getCatatan());
+        stmt.setInt(3, entry.getLevelMood());
+        stmt.setInt(4, moodid);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    } finally {
+        try {
+            if (stmt != null) stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }        
+   }
 
 
 

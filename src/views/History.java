@@ -7,6 +7,7 @@ package views;
 import controllers.Controller_History;
 import controllers.Controller_Login;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 public class History extends javax.swing.JFrame {
     private String username;
     private int Userid = Controller_Login.id_user;
+    private int moodid;
     private Controller_History controller;
     
     public History(Homepage home) {
@@ -57,19 +59,19 @@ public class History extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(37, 99, 235));
         jLabel1.setText("Your Mood Log");
 
-        tabel.setForeground(new java.awt.Color(51, 102, 255));
+        tabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Mood", "Description", "Level"
+                "ID", "Date", "Mood", "Description", "Level"
             }
         ));
-        tabel.setGridColor(new java.awt.Color(51, 102, 255));
+        tabel.setGridColor(new java.awt.Color(0, 0, 0));
         tabel.setSelectionForeground(new java.awt.Color(51, 102, 255));
         tabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,17 +81,24 @@ public class History extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabel);
 
         delete.setBackground(new java.awt.Color(255, 51, 51));
-        delete.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        delete.setFont(new java.awt.Font("Segoe UI Symbol", 1, 13)); // NOI18N
         delete.setForeground(new java.awt.Color(255, 255, 255));
+        delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/trash.png"))); // NOI18N
         delete.setText("Delete");
-        delete.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        delete.setBorder(null);
         delete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
 
         edit.setBackground(new java.awt.Color(255, 153, 51));
-        edit.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        edit.setFont(new java.awt.Font("Segoe UI Symbol", 1, 13)); // NOI18N
         edit.setForeground(new java.awt.Color(255, 255, 255));
-        edit.setText("Edit");
-        edit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/pen.png"))); // NOI18N
+        edit.setText("Edit ");
+        edit.setBorder(null);
         edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +113,11 @@ public class History extends javax.swing.JFrame {
         home.setText(" Home");
         home.setBorderPainted(false);
         home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home.setFocusPainted(false);
+        home.setFocusable(false);
+        home.setRequestFocusEnabled(false);
+        home.setRolloverEnabled(false);
+        home.setVerifyInputWhenFocusTarget(false);
         home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeActionPerformed(evt);
@@ -126,8 +140,8 @@ public class History extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(home))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
@@ -166,13 +180,40 @@ public class History extends javax.swing.JFrame {
     }//GEN-LAST:event_homeActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-        new Edit(this).setVisible(true);
-        dispose();
+        int selectedRow = tabel.getSelectedRow();
+        if (selectedRow != -1) {
+            int moodid = Integer.parseInt(tabel.getValueAt(selectedRow, 0).toString());
+            String timestamp = tabel.getValueAt(selectedRow, 1).toString();
+            String mood = tabel.getValueAt(selectedRow, 2).toString();
+            String description = tabel.getValueAt(selectedRow, 3).toString();
+            int level = Integer.parseInt(tabel.getValueAt(selectedRow, 4).toString());
+            
+            new Edit(this, moodid, timestamp, mood, description, level).setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin diedit!");
+        }
     }//GEN-LAST:event_editActionPerformed
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
-
+        int selectedRow = tabel.getSelectedRow();
+        if (selectedRow != -1) {
+            // Enable buttons when a row is selected
+            this.moodid = Integer.parseInt(tabel.getValueAt(selectedRow, 0).toString());
+            edit.setEnabled(true);
+            delete.setEnabled(true);
+        }
     }//GEN-LAST:event_tabelMouseClicked
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        int selectedRow = tabel.getSelectedRow();
+        if (selectedRow != -1) {
+            int moodid = Integer.parseInt(tabel.getValueAt(selectedRow, 0).toString());
+            controller.hapusData(moodid);
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin dihapus!");
+        }
+    }//GEN-LAST:event_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,8 +259,16 @@ public class History extends javax.swing.JFrame {
     }
     
     public javax.swing.JTable getTable() {
-    return tabel;
+        return tabel;
     }
+    public Controller_History getController() {
+        return controller;
+    }
+
+    public int getMoodid() {
+        return moodid;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delete;

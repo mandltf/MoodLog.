@@ -4,22 +4,33 @@ import javax.swing.JFrame;
 
 import javax.swing.JButton;
 import views.Form;
+import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
+import java.awt.Color;
 
 /**
  *
  * @author manda
  */
 public class Homepage extends javax.swing.JFrame {
+    private JButton[] moodButtons;
     private String username;
     public Homepage(String username) {
         this.username = username;
         initComponents();
+        moodButtons = new JButton[]{bmalu, bhappy, bsulking, bflushed, blovely, bkaget};
         welcome.setText("Hi, "+username);
         setVisible(true);
         setTitle("Homepage");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+    }
+    
+    private void clearMoodSelection() {
+        for (JButton btn : moodButtons) {
+            btn.setBorder(null);
+        }
     }
 
     /**
@@ -65,7 +76,7 @@ public class Homepage extends javax.swing.JFrame {
         jLabel2.setText("How's Your Day ?");
 
         bmalu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Embarrassed Emoji PNG-Photoroom.png"))); // NOI18N
-        bmalu.setBorderPainted(false);
+        bmalu.setBorder(null);
         bmalu.setContentAreaFilled(false);
         bmalu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bmalu.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +86,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         bsulking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Sulk Emoji PNG-Photoroom.png"))); // NOI18N
-        bsulking.setBorderPainted(false);
+        bsulking.setBorder(null);
         bsulking.setContentAreaFilled(false);
         bsulking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bsulking.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,7 +101,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         bhappy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Happy Emoji PNG-Photoroom.png"))); // NOI18N
-        bhappy.setBorderPainted(false);
+        bhappy.setBorder(null);
         bhappy.setContentAreaFilled(false);
         bhappy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bhappy.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +123,7 @@ public class Homepage extends javax.swing.JFrame {
         jLabel5.setText("Embarrassed");
 
         bflushed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Flushed Emoji PNG-Photoroom.png"))); // NOI18N
-        bflushed.setBorderPainted(false);
+        bflushed.setBorder(null);
         bflushed.setContentAreaFilled(false);
         bflushed.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bflushed.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +133,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         blovely.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Lovely Emoji PNG-Photoroom.png"))); // NOI18N
-        blovely.setBorderPainted(false);
+        blovely.setBorder(null);
         blovely.setContentAreaFilled(false);
         blovely.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         blovely.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +143,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         bkaget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/TikTok Surprised Emoji PNG-Photoroom.png"))); // NOI18N
-        bkaget.setBorderPainted(false);
+        bkaget.setBorder(null);
         bkaget.setContentAreaFilled(false);
         bkaget.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bkaget.addActionListener(new java.awt.event.ActionListener() {
@@ -288,33 +299,47 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bmaluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmaluActionPerformed
+        clearMoodSelection();
+        bmalu.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
         mood = "EMBARRASSED 👉👈";
     }//GEN-LAST:event_bmaluActionPerformed
 
     private void bsulkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsulkingActionPerformed
+        clearMoodSelection();
+        bsulking.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
         mood = "SULKING 😤";
     }//GEN-LAST:event_bsulkingActionPerformed
 
     private void bhappyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhappyActionPerformed
+        clearMoodSelection();
+        bhappy.setBorder(BorderFactory.createLineBorder(Color.PINK, 3));
         mood = "HAPPY 😚";
     }//GEN-LAST:event_bhappyActionPerformed
 
     private void bflushedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bflushedActionPerformed
-        mood = "FLUSHED 🤭";
+        clearMoodSelection();
+        bflushed.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 3));
+        mood = "FLUSHED 😳";
     }//GEN-LAST:event_bflushedActionPerformed
 
     private void blovelyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blovelyActionPerformed
-        mood = "LOVELY 🥰";
+        clearMoodSelection();
+        blovely.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 3));
+        mood = "LOVELY 😍";
     }//GEN-LAST:event_blovelyActionPerformed
 
     private void bkagetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkagetActionPerformed
+        clearMoodSelection();
+        bkaget.setBorder(BorderFactory.createLineBorder(Color.PINK, 3));
         mood = "SURPRISED 😱";
     }//GEN-LAST:event_bkagetActionPerformed
 
     private void addMoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMoodActionPerformed
         if(!mood.isEmpty()){
             new Form(this).setVisible(true);
-            dispose(); // Tutup form SignUp
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tentukan mood mu hari ini.");
         }
     }//GEN-LAST:event_addMoodActionPerformed
 

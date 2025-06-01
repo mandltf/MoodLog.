@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import controllers.Controller_Form;
 import controllers.Controller_Login;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,9 +38,9 @@ public class Form extends javax.swing.JFrame {
             expression.setForeground(Color.RED);
         }else if(mood.equals("HAPPY 😚")){
             expression.setForeground(new Color(255, 165, 0));
-        }else if(mood.equals("FLUSHED 🤭")){
+        }else if(mood.equals("FLUSHED 😳")){
             expression.setForeground(new Color(255, 99, 71));
-        }else if(mood.equals("LOVELY 🥰")){
+        }else if(mood.equals("LOVELY 😍")){
             expression.setForeground(new Color(255, 105, 180));
         }else if(mood.equals("SURPRISED 😱")){
             expression.setForeground(new Color(255, 69, 0));
@@ -124,12 +125,18 @@ public class Form extends javax.swing.JFrame {
         home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/emoji/lucide_home.png"))); // NOI18N
         home.setText(" Home");
         home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home.setFocusPainted(false);
+        home.setFocusable(false);
+        home.setRequestFocusEnabled(false);
+        home.setRolloverEnabled(false);
+        home.setVerifyInputWhenFocusTarget(false);
         home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeActionPerformed(evt);
             }
         });
 
+        rating.setBackground(new java.awt.Color(255, 255, 255));
         rating.setMajorTickSpacing(1);
         rating.setMaximum(10);
         rating.setPaintLabels(true);
@@ -143,7 +150,13 @@ public class Form extends javax.swing.JFrame {
                 .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(rating, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
@@ -159,17 +172,10 @@ public class Form extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(75, 75, 75))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(75, 75, 75))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(home)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(home)
+                .addGap(0, 399, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,11 +183,11 @@ public class Form extends javax.swing.JFrame {
                 .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addGap(34, 34, 34)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(expression, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -191,9 +197,9 @@ public class Form extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(32, 32, 32)
                 .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,6 +221,14 @@ public class Form extends javax.swing.JFrame {
     }//GEN-LAST:event_becauseActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        if (because.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Mohon isi alasan mood Anda", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int userid = Controller_Login.id_user;
         formulir.inputEmot(userid);
         new History(homepage).setVisible(true);
@@ -269,11 +283,11 @@ public class Form extends javax.swing.JFrame {
     }
 
     public String getCatatan() {
-        return catatan;
+        return because.getText();
     }
 
     public int getLevelMood() {
-        return LevelMood;
+        return rating.getValue();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

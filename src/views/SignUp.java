@@ -55,7 +55,7 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         signup.setBackground(new java.awt.Color(51, 102, 255));
-        signup.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        signup.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         signup.setForeground(new java.awt.Color(255, 255, 255));
         signup.setText("Sign Up");
         signup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));

@@ -5,6 +5,9 @@
 package views;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import controllers.Controller_Edit;
+import java.awt.HeadlessException;
 
 /**
  *
@@ -12,9 +15,56 @@ import javax.swing.JFrame;
  */
 public class Edit extends javax.swing.JFrame {
     private String username;
+    private String timestamp;
+    private String mood;
+    private String description;
+    private int level;
+    private int userid;
+    private int moodid;
+    private Controller_Edit controller;
+    private History history;
+    
     public Edit(History history) {
         this.username = history.getUsername();
+        this.userid = history.getUserid();
+        this.moodid = history.getMoodid();
+        this.history = history;
         initComponents();
+        controller = new Controller_Edit(this);
+        setVisible(true);
+        setTitle("Edit");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    }
+    
+    public Edit(History history, int moodid, String timestamp, String mood, String description, int level) {
+        this.username = history.getUsername();
+        this.userid = history.getUserid();
+        this.moodid = moodid;
+        this.timestamp = timestamp;
+        this.mood = mood;
+        this.description = description;
+        this.level = level;
+        this.history = history;
+        
+        initComponents();
+        controller = new Controller_Edit(this);
+        
+        // Set the values in the form
+        jLabel6.setText(timestamp);
+        
+        Mood.removeAllItems(); // buang isi lama dari initComponents()
+        Mood.addItem("EMBARRASSED 👉👈");
+        Mood.addItem("SULKING 😤");
+        Mood.addItem("HAPPY 😚");
+        Mood.addItem("FLUSHED 😳");
+        Mood.addItem("LOVELY 😍");
+        Mood.addItem("SURPRISED 😱");
+
+        Mood.setSelectedItem(mood); // set yang sesuai data sebelumnya
+
+        causes.setText(description);
+        rating.setValue(level);
+        
         setVisible(true);
         setTitle("Edit");
         setLocationRelativeTo(null);
@@ -36,10 +86,10 @@ public class Edit extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Mood = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        causes = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
+        rating = new javax.swing.JSlider();
+        submit = new javax.swing.JButton();
         home = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
@@ -63,7 +113,11 @@ public class Edit extends javax.swing.JFrame {
         jLabel3.setText("I Feel");
 
         Mood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sulking", "Happy", "Embarrassed", "Shout", "Lovely", "Surprised" }));
-        Mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 99, 235), 1, true));
+        Mood.setBorder(null);
+        Mood.setFocusable(false);
+        Mood.setLightWeightPopupEnabled(false);
+        Mood.setRequestFocusEnabled(false);
+        Mood.setVerifyInputWhenFocusTarget(false);
         Mood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MoodActionPerformed(evt);
@@ -76,21 +130,25 @@ public class Edit extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 0, 13)); // NOI18N
         jLabel5.setText("So I Rate My Mood :");
 
-        jSlider1.setMajorTickSpacing(1);
-        jSlider1.setMaximum(10);
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rating.setBackground(new java.awt.Color(255, 255, 255));
+        rating.setMajorTickSpacing(1);
+        rating.setMaximum(10);
+        rating.setPaintLabels(true);
+        rating.setPaintTicks(true);
+        rating.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rating.setFocusable(false);
+        rating.setRequestFocusEnabled(false);
+        rating.setVerifyInputWhenFocusTarget(false);
 
-        jButton1.setBackground(new java.awt.Color(37, 99, 235));
-        jButton1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Submit");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 99, 235), 1, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit.setBackground(new java.awt.Color(37, 99, 235));
+        submit.setFont(new java.awt.Font("Segoe UI Symbol", 1, 12)); // NOI18N
+        submit.setForeground(new java.awt.Color(255, 255, 255));
+        submit.setText("Submit");
+        submit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 99, 235), 1, true));
+        submit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitActionPerformed(evt);
             }
         });
 
@@ -101,6 +159,11 @@ public class Edit extends javax.swing.JFrame {
         home.setText(" Home");
         home.setBorderPainted(false);
         home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home.setFocusPainted(false);
+        home.setFocusable(false);
+        home.setRequestFocusEnabled(false);
+        home.setRolloverEnabled(false);
+        home.setVerifyInputWhenFocusTarget(false);
         home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeActionPerformed(evt);
@@ -108,7 +171,7 @@ public class Edit extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Symbol", 0, 13)); // NOI18N
-        jLabel6.setText("05/05/2025, 05.05");
+        jLabel6.setText("05/05/2025");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,23 +182,21 @@ public class Edit extends javax.swing.JFrame {
                     .addComponent(home)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Mood, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(rating, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Mood, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(causes)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)))))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(97, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -157,14 +218,14 @@ public class Edit extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(causes, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,9 +244,20 @@ public class Edit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        if (causes.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Mohon isi alasan mood Anda", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        controller.updateMood(timestamp, moodid);
+        history.getController().tampilData();
+        history.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_submitActionPerformed
 
     private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
         new Homepage(username).setVisible(true);
@@ -195,11 +267,21 @@ public class Edit extends javax.swing.JFrame {
     private void MoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MoodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MoodActionPerformed
+    public String getMood() {
+        return Mood.getSelectedItem().toString();
+    }
 
+    public String getCatatan() {
+        return causes.getText();
+    }
+
+    public int getLevelMood() {
+        return rating.getValue();
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -221,8 +303,6 @@ public class Edit extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Edit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
         /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
@@ -233,8 +313,8 @@ public class Edit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Mood;
+    private javax.swing.JTextField causes;
     private javax.swing.JButton home;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -242,7 +322,7 @@ public class Edit extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSlider rating;
+    private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }
