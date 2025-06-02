@@ -324,7 +324,7 @@ public class Homepage extends javax.swing.JFrame {
 
     private void blovelyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blovelyActionPerformed
         clearMoodSelection();
-        blovely.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 3));
+        blovely.setBorder(BorderFactory.createLineBorder(Color.PINK, 3));
         mood = "LOVELY 😍";
     }//GEN-LAST:event_blovelyActionPerformed
 
