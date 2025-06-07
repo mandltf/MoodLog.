@@ -5,7 +5,8 @@ A simple application for tracking and managing your daily mood. This Java-based 
 ## 📌 Features
 
 - 🔐 User Authentication (Sign Up & Login)
-| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign up.png) |
+
+| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign_up.png) |
 |:------------------------------------:|:----------------------------------------:|
 | Login Screen                         | Sign Up Screen                           |
 
