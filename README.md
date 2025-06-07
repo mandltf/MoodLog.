@@ -5,7 +5,7 @@ A simple application for tracking and managing your daily mood. This Java-based 
 ## 📌 Features
 
 - 🔐 User Authentication (Sign Up & Login)
-  <img src="screenshoot/login.PNG" width="400"/>
+  <img src="screenshoot/login.PNG" style="width:400px;">
 - 📅 Add Daily Mood Entry (with mood category & notes)
 - 📖 View Mood History
 - ✏️ Edit or Delete Existing Entries
