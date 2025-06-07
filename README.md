@@ -5,25 +5,18 @@ A simple application for tracking and managing your daily mood. This Java-based 
 ## 📌 Features
 
 - 🔐 User Authentication (Sign Up & Login)
-
-| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign_up.png) |
-|:------------------------------------:|:----------------------------------------:|
-| Login Screen                         | Sign Up Screen                           |
-
-- 📅 Add Daily Mood Entry (with mood category & notes)
-
-| ![Homepage](screenshoot/homepage.png) | ![Form](screenshoot/form.png) |
-|:------------------------------------:|:----------------------------------------:|
-| Homepage Screen                         | Form Screen                           |
-  
+- 📅 Add Daily Mood Entry (with mood category & notes)  
 - 📖 View Mood History
 - ✏️ Edit or Delete Existing Entries
-
-| ![History](screenshoot/history.png) | ![Edit](screenshoot/edit.png) |
-|:------------------------------------:|:----------------------------------------:|
-| History Screen                         | Edit Screen                           |
-
 - 💾 Local database support (MySQL)
+
+| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign_up.png) || ![Homepage](screenshoot/homepage.png) | 
+|:------------------------------------:|:----------------------------------------:|:------------------------------------:|
+| Login Screen                         | Sign Up Screen                           | Homepage Screen                           |
+
+| ![Form](screenshoot/form.png) | ![History](screenshoot/history.png) | ![Edit](screenshoot/edit.png) |
+|:----------------------------------------:|:----------------------------------------:|:------------------------------------:|
+| Form Screen                           | History Screen                         | Edit Screen                           |
 
 ## 🛠️ Technologies Used
 
