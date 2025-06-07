@@ -18,6 +18,11 @@ A simple application for tracking and managing your daily mood. This Java-based 
   
 - 📖 View Mood History
 - ✏️ Edit or Delete Existing Entries
+
+| ![History](screenshoot/history.png) | ![Edit](screenshoot/edit.png) |
+|:------------------------------------:|:----------------------------------------:|
+| History Screen                         | Edit Screen                           |
+
 - 💾 Local database support (MySQL)
 
 ## 🛠️ Technologies Used
