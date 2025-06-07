@@ -38,7 +38,6 @@ A simple application for tracking and managing your daily mood. This Java-based 
 <div style="display: flex; gap: 10px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java" width="40" style="background: #1e1e1e; padding: 8px; border-radius: 10px;" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" title="MySQL" width="40" style="background: #1e1e1e; padding: 8px; border-radius: 10px;" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Swing_icon.png" title="Java Swing" width="40" style="background: #1e1e1e; padding: 8px; border-radius: 10px;" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Apache_NetBeans_Logo.svg" title="NetBeans" width="40" style="background: #1e1e1e; padding: 8px; border-radius: 10px;" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" title="GitHub" width="40" style="background: #1e1e1e; padding: 8px; border-radius: 10px;" />
 </div>
