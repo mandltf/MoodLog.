@@ -36,6 +36,6 @@ A simple application for tracking and managing your daily mood. This Java-based 
 ## 🛠️ Languages and Tools
 
 <div>
-    <img src="https://skillicons.dev/icons?i=java,github,mysql"/><br/>
+    <img src="https://skillicons.dev/icons?i=java,mysql,github"/><br/>
 </div>
 
