@@ -10,9 +10,9 @@ A simple application for tracking and managing your daily mood. This Java-based 
 - ✏️ Edit or Delete Existing Entries
 - 💾 Local database support (MySQL)
 
-| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign_up.png) || ![Homepage](screenshoot/homepage.png) | 
-|:------------------------------------:|:----------------------------------------:|:------------------------------------:|
-| Login Screen                         | Sign Up Screen                           | Homepage Screen                      |
+| ![Login](screenshoot/login.png) | ![Sign Up](screenshoot/sign_up.png) | ![Homepage](screenshoot/homepage.png) |
+|:----------------------------------------:|:----------------------------------------:|:------------------------------------:|
+| Login Screen                           | Sign Up Screen                         | Homepage Screen                           |
 
 | ![Form](screenshoot/form.png) | ![History](screenshoot/history.png) | ![Edit](screenshoot/edit.png) |
 |:----------------------------------------:|:----------------------------------------:|:------------------------------------:|
