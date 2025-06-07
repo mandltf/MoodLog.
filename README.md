@@ -11,9 +11,13 @@ A simple application for tracking and managing your daily mood. This Java-based 
 | Login Screen                         | Sign Up Screen                           |
 
 - 📅 Add Daily Mood Entry (with mood category & notes)
+
+| ![Homepage](screenshoot/homepage.png) | ![Form](screenshoot/form.png) |
+|:------------------------------------:|:----------------------------------------:|
+| Homepage Screen                         | Form Screen                           |
+  
 - 📖 View Mood History
 - ✏️ Edit or Delete Existing Entries
-- 📊 Simple mood summary
 - 💾 Local database support (MySQL)
 
 ## 🛠️ Technologies Used
