@@ -1,4 +1,4 @@
-# 😄 MoodLog. : Mood Tracker - Final Project
+# 😎 MoodLog. : Mood Tracker - Final Project
 
 A simple application for tracking and managing your daily mood. This Java-based application was built as a final project using the **Model-View-Controller (MVC)** architecture with **Java Swing** for the GUI and **MySQL** as the backend database.
 
