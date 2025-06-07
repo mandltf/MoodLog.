@@ -6,8 +6,8 @@ A simple application for tracking and managing your daily mood. This Java-based 
 
 - 🔐 User Authentication (Sign Up & Login)
 <div align="center">
-  <img src="screenshots/login.png" style="width:45%; display:inline-block; margin-right:10px;" />
-  <img src="screenshots/history.png" style="width:45%; display:inline-block;" />
+  <img src="screenshoot/login.png" style="width:45%; display:inline-block; margin-right:10px;" />
+  <img src="screenshoot/signup.png" style="width:45%; display:inline-block;" />
 </div>
 
 - 📅 Add Daily Mood Entry (with mood category & notes)
