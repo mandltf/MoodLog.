@@ -2,6 +2,11 @@
 
 A simple application for tracking and managing your daily mood. This Java-based application was built as a final project using the **Model-View-Controller (MVC)** architecture with **Java Swing** for the GUI and **MySQL** as the backend database.
 
+| Name           | NIM         |
+|----------------|-------------|
+| Vincentius Ariell Sorongan   | 123230131  |
+| Amanda Latifa   | 123230138  |
+
 ## 📌 Features
 
 - 🔐 User Authentication (Sign Up & Login)
