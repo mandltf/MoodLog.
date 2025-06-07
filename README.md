@@ -26,10 +26,12 @@ A simple application for tracking and managing your daily mood. This Java-based 
 
 ## 🛠️ Technologies Used
 
-- **Java** (Java Swing for UI)
-- **MySQL** (for storing mood data)
-- **JDBC** (Java Database Connectivity)
-- **MVC Architecture**
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" title="MySQL" width="40"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Swing_icon.png" title="Java Swing" width="40"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Apache_NetBeans_Logo.svg" title="NetBeans" width="40"/>
+</div>
 
 ## 📁 Project Structure
 - **controllers/**: Handles logic and communication between models and views.
